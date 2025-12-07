@@ -1,0 +1,31 @@
+{% extends "students/base.html" %}
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-semibold">Attendance</h2>
+</div>
+
+<table class="min-w-full bg-white shadow rounded-xl overflow-hidden">
+    <thead class="bg-slate-200">
+        <tr>
+            <th class="px-4 py-2 text-left">Date</th>
+            <th class="px-4 py-2 text-left">Student</th>
+            <th class="px-4 py-2 text-left">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in attendances %}
+        <tr class="border-t">
+            <td class="px-4 py-2">{{ a.date|date:"Y-m-d" }}</td>
+            <td class="px-4 py-2">{{ a.student.firstName }} {{ a.student.lastName }}</td>
+            <td class="px-4 py-2">{{ a.status }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="px-4 py-4 text-center text-gray-500">
+                No attendance records yet.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

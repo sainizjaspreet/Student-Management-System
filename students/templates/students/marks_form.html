@@ -1,0 +1,50 @@
+{% extends "students/base.html" %} {% block content %}
+<h2 class="text-xl font-semibold mb-4">Add Mark</h2>
+<form method="post" class="bg-white shadow rounded-xl p-6 space-y-4">
+  {% csrf_token %} {{ form.studentId }} {{ form.subjectId }}
+  <div>
+    <label class="block text-sm font-medium mb-2">Select Subject</label>
+    <div class="grid grid-cols-2 gap-2" id="subject-choices">
+      {% for subj in subjects %}
+      <label class="inline-flex items-center gap-2 border rounded px-3 py-2">
+        <input type="checkbox" name="subject_choice" value="{{ subj.id }}" />
+        <span>{{ subj.name }}</span>
+      </label>
+      {% endfor %}
+    </div>
+    <p class="text-xs text-gray-500">Select one subject.</p>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Exam</label>
+    {{ form.examName }}
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Score</label>
+    {{ form.score }}
+  </div>
+  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+    Save
+  </button>
+</form>
+
+<script>
+  (function () {
+    const group = document.getElementById("subject-choices");
+    if (!group) return;
+    const hidden = document.getElementById("{{ form.subjectId.id_for_label }}");
+    group.addEventListener("change", (e) => {
+      if (e.target && e.target.name === "subject_choice") {
+        // Ensure only one checkbox is selected
+        const boxes = group.querySelectorAll(
+          'input[type="checkbox"][name="subject_choice"]'
+        );
+        boxes.forEach((box) => {
+          if (box !== e.target) box.checked = false;
+        });
+        // Set hidden subjectId
+        hidden.value = e.target.checked ? e.target.value : "";
+      }
+    });
+  })();
+</script>
+{% endblock %}

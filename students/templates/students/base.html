@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=2" />
+  </head>
+  <body class="bg-slate-100 min-h-screen">
+    <nav class="bg-blue-600 text-white px-6 py-3 flex gap-4">
+      <a href="{% url 'home' %}" class="font-semibold">Home</a>
+      <a href="{% url 'student_list' %}">Students</a>
+      <a href="{% url 'attendance_list' %}">Attendance</a>
+      <a href="{% url 'marks_list' %}">Marks</a>
+    </nav>
+
+    <div class="container mx-auto mt-6">{% block content %}{% endblock %}</div>
+  </body>
+</html>

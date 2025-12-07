@@ -1,0 +1,46 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-py"
+}
+
+model Student {
+  id          Int          @id @default(autoincrement())
+  rollNumber  String       @unique
+  firstName   String
+  lastName    String
+  email       String       @unique
+  className   String
+  createdAt   DateTime     @default(now())
+
+  attendance  Attendance[]
+  marks       Mark[]
+}
+
+model Subject {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  code   String @unique
+  marks  Mark[]
+}
+
+model Attendance {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  status    String
+  student   Student  @relation(fields: [studentId], references: [id])
+  studentId Int
+}
+
+model Mark {
+  id        Int     @id @default(autoincrement())
+  examName  String
+  score     Int
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId Int
+  subject   Subject @relation(fields: [subjectId], references: [id])
+  subjectId Int
+}

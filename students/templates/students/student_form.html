@@ -1,0 +1,21 @@
+{% extends "students/base.html" %}
+{% block content %}
+<h2 class="text-xl font-semibold mb-4">Add Student</h2>
+<form method="post" class="bg-white shadow rounded-xl p-6 space-y-4">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        <label class="block text-sm font-medium mb-1">
+            {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+        <p class="text-red-500 text-xs mt-1">{{ field.errors.0 }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+        Save
+    </button>
+</form>
+{% endblock %}

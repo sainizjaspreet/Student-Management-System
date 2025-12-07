@@ -1,0 +1,25 @@
+/* Tailwind via CDN; custom styles here. */
+
+.form-input {
+  border: 2px solid #2563eb; /* blue-600 */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 0.5rem 0.75rem; /* px-3 py-2 */
+  outline: none;
+  font-weight: 600; /* bold */
+  background-color: #f8fafc; /* slate-50 */
+}
+
+.form-input:focus {
+  border-color: #1d4ed8; /* blue-700 */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form-radio-group input[type="radio"] {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.25rem;
+}
+
+.form-radio-group label {
+  font-weight: 600;
+}
